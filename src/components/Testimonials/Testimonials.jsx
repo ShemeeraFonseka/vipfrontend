@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback} from 'react';
 import './Testimonials.css';
 import { FaQuoteLeft } from 'react-icons/fa';
 import axios from 'axios';
