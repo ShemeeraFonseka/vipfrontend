@@ -12,6 +12,34 @@ padding: 4rem 6rem;
   margin: 0 auto;
 }
 
+/* Social media button styling */
+.social-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  padding: 0;
+}
+
+.social-button:hover {
+  background: #fff;
+  color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-button:active {
+  transform: translateY(-1px);
+}
+
 /* Logo and brand */
 .footer-logo {
   font-size: 2rem;

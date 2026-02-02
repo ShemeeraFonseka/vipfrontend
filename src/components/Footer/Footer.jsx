@@ -48,15 +48,43 @@ const Footer = () => {
         </div>
 
         {/* Social Media */}
-        <div className="footer-social">
-          <h3>Follow Us</h3>
-          <div className="social-icons">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaTripadvisor /></a>
-          </div>
-        </div>
+<div className="footer-social">
+  <h3>Follow Us</h3>
+  <div className="social-icons">
+    <button 
+      type="button" 
+      onClick={() => console.log('Facebook clicked')}
+      aria-label="Facebook"
+      className="social-button"
+    >
+      <FaFacebookF />
+    </button>
+    <button 
+      type="button" 
+      onClick={() => console.log('Instagram clicked')}
+      aria-label="Instagram"
+      className="social-button"
+    >
+      <FaInstagram />
+    </button>
+    <button 
+      type="button" 
+      onClick={() => console.log('Twitter clicked')}
+      aria-label="Twitter"
+      className="social-button"
+    >
+      <FaTwitter />
+    </button>
+    <button 
+      type="button" 
+      onClick={() => console.log('TripAdvisor clicked')}
+      aria-label="TripAdvisor"
+      className="social-button"
+    >
+      <FaTripadvisor />
+    </button>
+  </div>
+</div>
       </div>
 
       <div className="footer-bottom">

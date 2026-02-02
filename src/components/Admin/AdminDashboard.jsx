@@ -4119,118 +4119,93 @@ useEffect(() => {
                 </div>
 
                 <ul className="sidebar-nav">
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'packages' ? 'active' : ''}
+            onClick={() => handleSectionChange('packages')}
+        >
+            <i className="fas fa-suitcase"></i>
+            <span>Tour Packages</span>
+        </button>
+    </li>
 
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'users' ? 'active' : ''}
+            onClick={() => handleSectionChange('users')}
+        >
+            <i className="fas fa-box"></i>
+            <span>Users</span>
+        </button>
+    </li>
+    
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'bookings' ? 'active' : ''}
+            onClick={() => handleSectionChange('bookings')}
+        >
+            <i className="fas fa-calendar-alt"></i>
+            <span>Bookings</span>
+        </button>
+    </li>
 
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'website' ? 'active' : ''}
+            onClick={() => handleSectionChange('website')}
+        >
+            <i className="fas fa-calendar-alt"></i>
+            <span>Website</span>
+        </button>
+    </li>
 
-                    <li>
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'destinations' ? 'active' : ''}
+            onClick={() => handleSectionChange('destinations')}
+        >
+            <i className="fas fa-images"></i>
+            <span>Destinations</span>
+        </button>
+    </li>
 
-                        <a href="#"
-                            className={activeSection === 'packages' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('packages');
-                            }}
-                        >
-                            <i className="fas fa-suitcase"></i>
-                            <span>Tour Packages</span>
-                        </a>
-                    </li>
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'gallery' ? 'active' : ''}
+            onClick={() => handleSectionChange('gallery')}
+        >
+            <i className="fas fa-images"></i>
+            <span>Gallery</span>
+        </button>
+    </li>
 
-                    <li>
-                        <a
-                            href="#"
-                            className={activeSection === 'users' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('users');
-                            }}
-                        >
-                            <i className="fas fa-box"></i>
-                            <span>Users</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            className={activeSection === 'bookings' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('bookings');
-                            }}
-                        >
-                            <i className="fas fa-calendar-alt"></i>
-                            <span>Bookings</span>
-                        </a>
-                    </li>
+    <li>
+        <button
+            type="button"
+            className={activeSection === 'testimonials' ? 'active' : ''}
+            onClick={() => handleSectionChange('testimonials')}
+        >
+            <i className="fas fa-comment-dots"></i>
+            <span>Testimonials</span>
+        </button>
+    </li>
 
-                    <li>
-                        <a
-                            href="#"
-                            className={activeSection === 'website' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('website');
-                            }}
-                        >
-                            <i className="fas fa-calendar-alt"></i>
-                            <span>Website</span>
-                        </a>
-                    </li>
-
-
-
-                    <li>
-
-                        <a href="#"
-                            className={activeSection === 'destinations' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('destinations');
-                            }}
-                        >
-                            <i className="fas fa-images"></i>
-                            <span>Destinations</span>
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a href="#"
-                            className={activeSection === 'gallery' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('gallery');
-                            }}
-                        >
-                            <i className="fas fa-images"></i>
-                            <span>Gallery</span>
-                        </a>
-                    </li>
-
-                    <li>
-
-                        <a href="#"
-                            className={activeSection === 'testimonials' ? 'active' : ''}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleSectionChange('testimonials');
-                            }}
-                        >
-                            <i className="fas fa-comment-dots"></i>
-                            <span>Testimonials</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" onClick={(e) => {
-                            e.preventDefault();
-                            handleLogout();
-                        }}>
-                            <i className="fas fa-sign-out-alt"></i>
-                            <span>Logout</span>
-                        </a>
-                    </li>
-                </ul>
+    <li>
+        <button
+            type="button"
+            onClick={handleLogout}
+        >
+            <i className="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </li>
+</ul>
             </div>
 
             {/* Main Content */}
