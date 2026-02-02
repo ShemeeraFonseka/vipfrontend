@@ -8,9 +8,7 @@ const Destination = () => {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  
 
-  import { useCallback, useEffect } from "react";
 
 const fetchGalleryItems = useCallback(async () => {
   try {
