@@ -23,7 +23,7 @@ const Pa1 = () => {
       };
   
       fetchContactInfo();
-    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [API_URL]); 
 
   const scheduleData = [
     {

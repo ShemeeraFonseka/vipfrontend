@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useCallback} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PackageDetail.css';
@@ -62,26 +62,26 @@ const PackageDetail = () => {
     { code: '+64', country: 'New Zealand' },
   ].sort((a, b) => a.country.localeCompare(b.country));
 
-  useEffect(() => {
-    fetchPackageDetail();
-  }, [packageId]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchPackageDetail = useCallback(async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vipapi/packages/${packageId}`);
+    setPackageData(res.data);
 
-  const fetchPackageDetail = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/vipapi/packages/${packageId}`);
-      setPackageData(res.data);
-      // Pre-fill destination with package title
-      setBookingFormData(prev => ({
-        ...prev,
-        destination: res.data.title
-      }));
-    } catch (err) {
-      console.error("❌ Error fetching package details:", err);
-      setError('Package not found');
-    } finally {
-      setLoading(false);
-    }
-  };
+    setBookingFormData(prev => ({
+      ...prev,
+      destination: res.data.title
+    }));
+  } catch (err) {
+    console.error("❌ Error fetching package details:", err);
+    setError("Package not found");
+  } finally {
+    setLoading(false);
+  }
+}, [API_URL, packageId]);
+
+useEffect(() => {
+  fetchPackageDetail();
+}, [fetchPackageDetail]);
 
   const handleBookingInputChange = (e) => {
     const { name, value } = e.target;

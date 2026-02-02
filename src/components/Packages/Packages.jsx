@@ -9,9 +9,7 @@ const Packages = () => {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    fetchPackages();
-  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+  
 
   const fetchPackages = async () => {
     try {
@@ -24,6 +22,10 @@ const Packages = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchPackages();
+  }, [fetchPackages]); 
 
   if (loading) {
     return (

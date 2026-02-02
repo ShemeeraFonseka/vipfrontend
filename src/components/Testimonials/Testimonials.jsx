@@ -9,9 +9,7 @@ const Testimonials = () => {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    fetchTestimonials();
-  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+  
 
   const fetchTestimonials = async () => {
     try {
@@ -24,6 +22,10 @@ const Testimonials = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, [fetchTestimonials]); 
 
   if (loading) {
     return (

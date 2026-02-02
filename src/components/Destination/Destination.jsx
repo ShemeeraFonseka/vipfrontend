@@ -10,7 +10,7 @@ const Destination = () => {
 
   useEffect(() => {
     fetchGalleryItems();
-  }, []);
+  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const fetchGalleryItems = async () => {
     try {
