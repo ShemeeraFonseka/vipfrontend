@@ -9,31 +9,17 @@ const AdminDashboard = () => {
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-    const [dashboardStats, setDashboardStats] = useState({
-        totalBookings: 0,
-        pendingBookings: 0,
-        confirmedBookings: 0,
-        cancelledBookings: 0,
-        totalPackages: 0,
-        totalUsers: 0,
-        activeUsers: 0,
-        totalGuides: 0,
-        recentBookings: [],
-        monthlyRevenue: 0,
-        popularPackages: []
-    });
-
+    
     
 
-    // Add this fetch function
-    const fetchDashboardData = async () => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/travelaapi/dashboard/stats`);
-            setDashboardStats(response.data);
-        } catch (err) {
-            console.error('Error fetching dashboard stats:', err);
-        }
-    };
+    const fetchDashboardData = useCallback(async () => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/travelaapi/dashboard/stats`);
+        setDashboardStats(response.data);
+    } catch (err) {
+        console.error('Error fetching dashboard stats:', err);
+    }
+}, []); // Empty dependency array - only created once
 
     // Add this useEffect to fetch dashboard data when component mounts
     useEffect(() => {
@@ -90,31 +76,29 @@ const API_URL = process.env.REACT_APP_API_URL;
     const [homeEditingId, setHomeEditingId] = useState(null);
 
 
-    const fetchContactInfo = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/contact-info`);
-            setContactInfo([res.data]); // Wrap in array for table display
-        } catch (err) {
-            console.error('Error fetching contact info:', err);
-        }
-    };
+   const fetchContactInfo = useCallback(async () => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/contact-info`);
+        setContactInfo([res.data]);
+    } catch (err) {
+        console.error('Error fetching contact info:', err);
+    }
+}, []); // Empty dependency array
+
 
     const handleContactInputChange = (e) => {
         setContactFormData({ ...contactFormData, [e.target.name]: e.target.value });
     };
 
-    const fetchHomeInfo = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/home`);
-
-            // Ensure homeInfo is always an array of objects
-            const data = Array.isArray(res.data) ? res.data : [res.data];
-            setHomeInfo(data);
-        } catch (err) {
-            console.error('Error fetching home info:', err);
-        }
-    };
-
+    const fetchHomeInfo = useCallback(async () => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/home`);
+        const data = Array.isArray(res.data) ? res.data : [res.data];
+        setHomeInfo(data);
+    } catch (err) {
+        console.error('Error fetching home info:', err);
+    }
+}, []); // Empty dependency array
 
     const handleHomeInputChange = (e) => {
         setHomeFormData({ ...homeFormData, [e.target.name]: e.target.value });
@@ -163,9 +147,9 @@ const API_URL = process.env.REACT_APP_API_URL;
         });
     };
 
-    useEffect(() => {
-        fetchHomeInfo();
-    }, [fetchHomeInfo]); 
+   useEffect(() => {
+    fetchHomeInfo();
+}, [fetchHomeInfo]); // This is now safe because fetchHomeInfo is wrapped in useCallback
 
     const toggleSidebar = () => {
         setSidebarActive(!sidebarActive);
@@ -321,17 +305,18 @@ const API_URL = process.env.REACT_APP_API_URL;
     const [aboutEditingId, setAboutEditingId] = useState(null);
 
     // ============= ABOUT HANDLERS (Replace existing about handlers) =============
-    const fetchAbouts = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/about`);
-            // Backend returns single document, wrap in array for consistency
-            if (res.data) {
-                setAbouts([res.data]);
-            }
-        } catch (err) {
-            console.error('Error fetching Content:', err);
+    const fetchAbouts = useCallback(async () => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/about`);
+        if (res.data) {
+            setAbouts([res.data]);
         }
-    };
+    } catch (err) {
+        console.error('Error fetching Content:', err);
+    }
+}, []); // Empty dependency array
+
+
 
     const handleAboutInputChange = (e) => {
         setAboutFormData({ ...aboutFormData, [e.target.name]: e.target.value });
@@ -921,15 +906,15 @@ useEffect(() => {
     };
 
 
-    const fetchVipPackages = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/packages`);
-            setVipPackages(res.data);
-            calculateVipPackageStats(res.data);
-        } catch (err) {
-            console.error('Error fetching packages:', err);
-        }
-    };
+    const fetchVipPackages = useCallback(async () => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/packages`);
+        setVipPackages(res.data);
+        calculateVipPackageStats(res.data);
+    } catch (err) {
+        console.error('Error fetching packages:', err);
+    }
+}, []); // Empty dependency array
 
     const calculateVipPackageStats = (data) => {
         const stats = {
@@ -1364,7 +1349,7 @@ useEffect(() => {
         setContactImage(null);
     };
 
-   useEffect(() => {
+  useEffect(() => {
   if (activeSection === "packages") {
     fetchVipPackages();
   }
@@ -1373,12 +1358,8 @@ useEffect(() => {
     fetchAbouts();
     fetchContactInfo();
   }
-}, [
-  activeSection,
-  fetchVipPackages,
-  fetchAbouts,
-  fetchContactInfo
-]);
+}, [activeSection, fetchVipPackages, fetchAbouts, fetchContactInfo]); // Now safe with useCallback
+
 
     const renderContent = () => {
         switch (activeSection) {
