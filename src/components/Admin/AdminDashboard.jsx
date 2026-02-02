@@ -1,5 +1,5 @@
 import './AdminDashboard.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaQuoteLeft } from 'react-icons/fa';
@@ -7,7 +7,7 @@ import { FaQuoteLeft } from 'react-icons/fa';
 
 const AdminDashboard = () => {
 
-
+const API_URL = process.env.REACT_APP_API_URL;
 
     const [dashboardStats, setDashboardStats] = useState({
         totalBookings: 0,
