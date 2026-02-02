@@ -19,9 +19,7 @@ const Pa1 = () => {
           setContactInfo(res.data);
         } catch (err) {
           console.error("❌ Error fetching contact info:", err);
-        } finally {
-          setLoading(false);
-        }
+        } 
       };
   
       fetchContactInfo();
