@@ -21,12 +21,9 @@ const AdminDashboard = () => {
         recentBookings: [],
         monthlyRevenue: 0,
         popularPackages: []
-    }); // eslint-disable-next-line react-hooks/exhaustive-deps
+    });
 
-    // Add this useEffect to fetch dashboard data when component mounts
-    useEffect(() => {
-        fetchDashboardData();
-    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+    
 
     // Add this fetch function
     const fetchDashboardData = async () => {
@@ -37,6 +34,11 @@ const AdminDashboard = () => {
             console.error('Error fetching dashboard stats:', err);
         }
     };
+
+    // Add this useEffect to fetch dashboard data when component mounts
+    useEffect(() => {
+        fetchDashboardData();
+    }, [fetchDashboardData]);
 
     const navigate = useNavigate();
     const adminUser = JSON.parse(localStorage.getItem('adminUser') || '{}');
@@ -163,7 +165,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         fetchHomeInfo();
-    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fetchHomeInfo]); 
 
     const toggleSidebar = () => {
         setSidebarActive(!sidebarActive);
@@ -655,24 +657,23 @@ const AdminDashboard = () => {
         inactive: 0
     });
 
-    // Add to your useEffect
-    useEffect(() => {
-        // ... existing code
-        if (activeSection === 'testimonials') {
-            fetchTestimonials();
-        }
-    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
+    
+const fetchTestimonials = useCallback(async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vipapi/testimonials`);
+    setTestimonials(res.data);
+    calculateTestimonialStats(res.data);
+  } catch (err) {
+    console.error("Error fetching testimonials:", err);
+  }
+}, [API_URL]);
 
-    // Add these handler functions
-    const fetchTestimonials = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/testimonials`);
-            setTestimonials(res.data);
-            calculateTestimonialStats(res.data);
-        } catch (err) {
-            console.error('Error fetching testimonials:', err);
-        }
-    };
+useEffect(() => {
+  if (activeSection === "testimonials") {
+    fetchTestimonials();
+  }
+}, [activeSection, fetchTestimonials]);
+
 
     const calculateTestimonialStats = (data) => {
         const stats = {
@@ -1050,25 +1051,22 @@ const AdminDashboard = () => {
     const [bookingSearch, setBookingSearch] = useState('');
     const [bookingStatusFilter, setBookingStatusFilter] = useState('all');
 
-    // Add to your useEffect (around line 500)
-    useEffect(() => {
-        // ... existing code
-        if (activeSection === 'bookings') {
-            fetchBookings();
-        }
-    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fetchBookings = useCallback(async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vipapi/bookings`);
+    setBookings(res.data);
+    calculateBookingStats(res.data);
+  } catch (err) {
+    console.error("Error fetching bookings:", err);
+    alert("Error fetching bookings");
+  }
+}, [API_URL]);
 
-    // Add these handler functions (around line 800)
-    const fetchBookings = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/bookings`);
-            setBookings(res.data);
-            calculateBookingStats(res.data);
-        } catch (err) {
-            console.error('Error fetching bookings:', err);
-            alert('Error fetching bookings');
-        }
-    };
+useEffect(() => {
+  if (activeSection === "bookings") {
+    fetchBookings();
+  }
+}, [activeSection, fetchBookings]);
 
     const calculateBookingStats = (data) => {
         const stats = {
@@ -1366,19 +1364,21 @@ const AdminDashboard = () => {
         setContactImage(null);
     };
 
-    useEffect(() => {
-        if (activeSection === 'packages') {
-            fetchVipPackages();
-        }
-        if (activeSection === 'bookings') {
+   useEffect(() => {
+  if (activeSection === "packages") {
+    fetchVipPackages();
+  }
 
-        }
-        if (activeSection === 'website') {
-            fetchAbouts();
-            fetchContactInfo();
-        }
-
-    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  if (activeSection === "website") {
+    fetchAbouts();
+    fetchContactInfo();
+  }
+}, [
+  activeSection,
+  fetchVipPackages,
+  fetchAbouts,
+  fetchContactInfo
+]);
 
     const renderContent = () => {
         switch (activeSection) {

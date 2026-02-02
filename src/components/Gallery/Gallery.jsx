@@ -8,10 +8,7 @@ const Gallery = () => {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    fetchGalleryItems();
-  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
-
+  
   const fetchGalleryItems = async () => {
     try {
       const res = await axios.get(`${API_URL}/vipapi/gallery`);
@@ -21,7 +18,11 @@ const Gallery = () => {
     } finally {
       setLoading(false);
     }
-  }; // eslint-disable-next-line react-hooks/exhaustive-deps
+  }; 
+
+  useEffect(() => {
+    fetchGalleryItems();
+  }, [fetchGalleryItems]); 
 
   if (loading) {
     return (

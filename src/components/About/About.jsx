@@ -10,9 +10,7 @@ const About = () => {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    fetchAboutData();
-  }, []) // eslint-disable-next-line react-hooks/exhaustive-deps
+  
 
   const fetchAboutData = async () => {
     try {
@@ -27,7 +25,11 @@ const About = () => {
     } finally {
       setLoading(false)
     }
-  } // eslint-disable-next-line react-hooks/exhaustive-deps
+  } 
+
+  useEffect(() => {
+    fetchAboutData();
+  }, [fetchAboutData]) 
 
   const getDefaultData = () => ({
     section1: {
