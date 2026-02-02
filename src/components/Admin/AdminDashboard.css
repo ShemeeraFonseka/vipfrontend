@@ -68,8 +68,8 @@
 }
 
 .sidebar-nav li button.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-left: 4px solid #fff;
+  background: linear-gradient(135deg, #941010 0%, #3f0101 100%);
+  border-left: 4px solid #e64444;
 }
 
 .sidebar-nav li button i {
