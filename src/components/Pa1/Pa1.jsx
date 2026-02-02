@@ -11,7 +11,6 @@ const Pa1 = () => {
       mobile: '',
       email: ''
     });
-    const [loading, setLoading] = useState(true);
   
     useEffect(() => {
       const fetchContactInfo = async () => {
@@ -26,7 +25,7 @@ const Pa1 = () => {
       };
   
       fetchContactInfo();
-    }, []);
+    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const scheduleData = [
     {

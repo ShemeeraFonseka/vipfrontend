@@ -64,7 +64,7 @@ const PackageDetail = () => {
 
   useEffect(() => {
     fetchPackageDetail();
-  }, [packageId]);
+  }, [packageId]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const fetchPackageDetail = async () => {
     try {

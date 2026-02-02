@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './About.css'
-import Gallery from '../Gallery/Gallery'
 import axios from 'axios'
 
 const About = () => {
@@ -13,7 +12,7 @@ const About = () => {
 
   useEffect(() => {
     fetchAboutData();
-  }, [])
+  }, []) // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const fetchAboutData = async () => {
     try {

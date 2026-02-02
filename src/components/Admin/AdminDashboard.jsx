@@ -21,12 +21,12 @@ const AdminDashboard = () => {
         recentBookings: [],
         monthlyRevenue: 0,
         popularPackages: []
-    });
+    }); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Add this useEffect to fetch dashboard data when component mounts
     useEffect(() => {
         fetchDashboardData();
-    }, []);
+    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Add this fetch function
     const fetchDashboardData = async () => {
@@ -163,7 +163,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         fetchHomeInfo();
-    }, []);
+    }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const toggleSidebar = () => {
         setSidebarActive(!sidebarActive);
@@ -201,7 +201,7 @@ const AdminDashboard = () => {
             fetchUserStats();
         }
         // ... rest of your existing useEffect code
-    }, [activeSection]);
+    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Fetch functions
     const fetchUsers = async () => {
@@ -458,7 +458,7 @@ const AdminDashboard = () => {
         if (activeSection === 'gallery') {
             fetchGalleryItems();
         }
-    }, [activeSection]);
+    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Add these handler functions
     const fetchGalleryItems = async () => {
@@ -557,7 +557,7 @@ const AdminDashboard = () => {
         if (activeSection === 'destinations') {
             fetchDestinationItems();
         }
-    }, [activeSection]);
+    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Add these handler functions
     const fetchDestinationItems = async () => {
@@ -661,7 +661,7 @@ const AdminDashboard = () => {
         if (activeSection === 'testimonials') {
             fetchTestimonials();
         }
-    }, [activeSection]);
+    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Add these handler functions
     const fetchTestimonials = async () => {
@@ -800,16 +800,7 @@ const AdminDashboard = () => {
         setVipPackageSections(updatedSections);
     };
 
-    const handleSectionImageChange = (index, file) => {
-        const updatedSections = [...vipPackageSections];
-        updatedSections[index].sectionImage = file;
-        setVipPackageSections(updatedSections);
-
-        // Update preview
-        const updatedPreviews = [...sectionPreviews];
-        updatedPreviews[index] = URL.createObjectURL(file);
-        setSectionPreviews(updatedPreviews);
-    };
+    
 
     const addSection = () => {
         setVipPackageSections([
@@ -1065,7 +1056,7 @@ const AdminDashboard = () => {
         if (activeSection === 'bookings') {
             fetchBookings();
         }
-    }, [activeSection]);
+    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // Add these handler functions (around line 800)
     const fetchBookings = async () => {
@@ -1387,7 +1378,7 @@ const AdminDashboard = () => {
             fetchContactInfo();
         }
 
-    }, [activeSection]);
+    }, [activeSection]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const renderContent = () => {
         switch (activeSection) {
