@@ -12,19 +12,7 @@ const API_URL = process.env.REACT_APP_API_URL;
     
     
 
-    const fetchDashboardData = useCallback(async () => {
-    try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/travelaapi/dashboard/stats`);
-        
-    } catch (err) {
-        console.error('Error fetching dashboard stats:', err);
-    }
-}, []); // Empty dependency array - only created once
-
-    // Add this useEffect to fetch dashboard data when component mounts
-    useEffect(() => {
-        fetchDashboardData();
-    }, [fetchDashboardData]);
+    
 
     const navigate = useNavigate();
     const adminUser = JSON.parse(localStorage.getItem('adminUser') || '{}');
