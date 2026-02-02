@@ -11,21 +11,22 @@ const Packages = () => {
 
   
 
-  const fetchPackages = async () => {
-    try {
-      // Fetch only active packages for public display
-      const res = await axios.get(`${API_URL}/vipapi/packages/active`);
-      setPackagesData(res.data);
-    } catch (err) {
-      console.error("❌ Error fetching packages:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchPackages = useCallback(async () => {
+  try {
+    // Fetch only active packages for public display
+    const res = await axios.get(`${API_URL}/vipapi/packages/active`);
+    setPackagesData(res.data);
+  } catch (err) {
+    console.error("❌ Error fetching packages:", err);
+  } finally {
+    setLoading(false);
+  }
+}, [API_URL]);
 
-  useEffect(() => {
-    fetchPackages();
-  }, [fetchPackages]); 
+useEffect(() => {
+  fetchPackages();
+}, [fetchPackages]);
+
 
   if (loading) {
     return (

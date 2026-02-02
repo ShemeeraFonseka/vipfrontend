@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import './Destination.css';
 import axios from 'axios';
 
@@ -10,20 +10,22 @@ const Destination = () => {
 
   
 
-  const fetchGalleryItems = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/vipapi/destination`);
-      setGalleryItems(res.data);
-    } catch (err) {
-      console.error("❌ Error fetching gallery items:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  import { useCallback, useEffect } from "react";
 
-  useEffect(() => {
-    fetchGalleryItems();
-  }, [fetchGalleryItems]); 
+const fetchGalleryItems = useCallback(async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vipapi/destination`);
+    setGalleryItems(res.data);
+  } catch (err) {
+    console.error("❌ Error fetching gallery items:", err);
+  } finally {
+    setLoading(false);
+  }
+}, [API_URL]);
+
+useEffect(() => {
+  fetchGalleryItems();
+}, [fetchGalleryItems]);
 
   if (loading) {
     return (

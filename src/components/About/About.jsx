@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './About.css'
 import axios from 'axios'
 
@@ -12,24 +12,24 @@ const About = () => {
 
   
 
-  const fetchAboutData = async () => {
-    try {
-      setLoading(true)
-      const response = await axios.get(`${API_URL}/vipapi/about`)
-      setAboutData(response.data)
-      setError(null)
-    } catch (err) {
-      console.error('Error fetching about data:', err)
-      setError('Failed to load content. Showing default content')
-      setAboutData(getDefaultData())
-    } finally {
-      setLoading(false)
-    }
-  } 
+  const fetchAboutData = useCallback(async () => {
+  try {
+    setLoading(true);
+    const response = await axios.get(`${API_URL}/vipapi/about`);
+    setAboutData(response.data);
+    setError(null);
+  } catch (err) {
+    console.error("Error fetching about data:", err);
+    setError("Failed to load content. Showing default content");
+    setAboutData(getDefaultData());
+  } finally {
+    setLoading(false);
+  }
+}, [API_URL]);
 
-  useEffect(() => {
-    fetchAboutData();
-  }, [fetchAboutData]) 
+useEffect(() => {
+  fetchAboutData();
+}, [fetchAboutData]);
 
   const getDefaultData = () => ({
     section1: {

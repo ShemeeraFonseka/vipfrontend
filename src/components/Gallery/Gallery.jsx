@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback} from 'react';
 import './Gallery.css';
 import axios from 'axios';
 
@@ -9,20 +9,20 @@ const Gallery = () => {
   const API_URL = process.env.REACT_APP_API_URL;
 
   
-  const fetchGalleryItems = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/vipapi/gallery`);
-      setGalleryItems(res.data);
-    } catch (err) {
-      console.error("❌ Error fetching gallery items:", err);
-    } finally {
-      setLoading(false);
-    }
-  }; 
+  const fetchGalleryItems = useCallback(async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vipapi/gallery`);
+    setGalleryItems(res.data);
+  } catch (err) {
+    console.error("❌ Error fetching gallery items:", err);
+  } finally {
+    setLoading(false);
+  }
+}, [API_URL]);
 
-  useEffect(() => {
-    fetchGalleryItems();
-  }, [fetchGalleryItems]); 
+useEffect(() => {
+  fetchGalleryItems();
+}, [fetchGalleryItems]);
 
   if (loading) {
     return (

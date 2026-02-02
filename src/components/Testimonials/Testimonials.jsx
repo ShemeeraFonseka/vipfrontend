@@ -11,21 +11,21 @@ const Testimonials = () => {
 
   
 
-  const fetchTestimonials = async () => {
-    try {
-      // Fetch only active testimonials for public display
-      const res = await axios.get(`${API_URL}/vipapi/testimonials/active`);
-      setTestimonials(res.data);
-    } catch (err) {
-      console.error("❌ Error fetching testimonials:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchTestimonials = useCallback(async () => {
+  try {
+    // Fetch only active testimonials for public display
+    const res = await axios.get(`${API_URL}/vipapi/testimonials/active`);
+    setTestimonials(res.data);
+  } catch (err) {
+    console.error("❌ Error fetching testimonials:", err);
+  } finally {
+    setLoading(false);
+  }
+}, [API_URL]);
 
-  useEffect(() => {
-    fetchTestimonials();
-  }, [fetchTestimonials]); 
+useEffect(() => {
+  fetchTestimonials();
+}, [fetchTestimonials]);
 
   if (loading) {
     return (
