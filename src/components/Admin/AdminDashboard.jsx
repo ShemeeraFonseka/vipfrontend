@@ -180,7 +180,7 @@ const API_URL = process.env.REACT_APP_API_URL;
     // Fetch functions
     const fetchUsers = async () => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/travelaapi/users`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/users`);
             setUsers(res.data);
         } catch (err) {
             console.error('Error fetching users:', err);
@@ -190,7 +190,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
     const fetchUserStats = async () => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/travelaapi/users/stats/summary`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/vipapi/users/stats/summary`);
             setUserStats(res.data);
         } catch (err) {
             console.error('Error fetching user stats:', err);
@@ -212,14 +212,14 @@ const API_URL = process.env.REACT_APP_API_URL;
                     delete updateData.password;
                 }
 
-                await axios.put(`${process.env.REACT_APP_API_URL}/travelaapi/users/${editingUserId}`, updateData);
+                await axios.put(`${process.env.REACT_APP_API_URL}/vipapi/users/${editingUserId}`, updateData);
                 alert('User updated successfully');
             } else {
                 if (!userFormData.password) {
                     alert('Password is required for new users');
                     return;
                 }
-                await axios.post(`${process.env.REACT_APP_API_URL}/travelaapi/users`, userFormData);
+                await axios.post(`${process.env.REACT_APP_API_URL}/vipapi/users`, userFormData);
                 alert('User created successfully');
             }
 
@@ -249,7 +249,7 @@ const API_URL = process.env.REACT_APP_API_URL;
     const handleUserDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
             try {
-                await axios.delete(`${process.env.REACT_APP_API_URL}/travelaapi/users/${id}`);
+                await axios.delete(`${process.env.REACT_APP_API_URL}/vipapi/users/${id}`);
                 alert('User deleted successfully');
                 fetchUsers();
                 fetchUserStats();
@@ -1899,7 +1899,6 @@ useEffect(() => {
                                                         <th>Check-in</th>
                                                         <th>Check-out</th>
                                                         <th>Guests</th>
-                                                        <th>Country Code</th>
                                                         <th>Status</th>
                                                         <th>Created</th>
                                                         <th>Actions</th>
@@ -1920,7 +1919,6 @@ useEffect(() => {
                                                                     {booking.children > 0 && `, ${booking.children} Child${booking.children !== 1 ? 'ren' : ''}`}
                                                                 </div>
                                                             </td>
-                                                            <td>{booking.countryCode}</td>
                                                             <td>
                                                                 <select
                                                                     value={booking.status}

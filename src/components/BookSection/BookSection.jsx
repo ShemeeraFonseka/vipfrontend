@@ -1,7 +1,14 @@
 import React from 'react'
 import './BookSection.css'
+import { useNavigate } from 'react-router-dom'
+
 
 const BookSection = () => {
+  const navigate = useNavigate();
+  const navigatePackages = () => {
+    navigate('/packages');
+  };
+
   return (
     <section className="book-section">
       <div className="book-overlay">
@@ -11,7 +18,7 @@ const BookSection = () => {
             Experience Sri Lanka like never before — from stunning beaches to ancient wonders.
             Your dream vacation is just one click away.
           </p>
-          <button className="book-btn">Book Now</button>
+          <button className="book-btn" onClick={navigatePackages}>Book Now</button>
         </div>
       </div>
     </section>
